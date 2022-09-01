@@ -13,7 +13,7 @@ Each of the questions/tasks below can be answered using a `SELECT` query. When y
 2) Find all the matches featuring Barcelona.
 
 ```sql
-<!SELECT * FROM matches WHERE hometeam = 'Barcelona' OR awayteam = 'Barcelona'
+<!SELECT name FROM matches WHERE (hometeam = 'Barcelona' OR awayteam) = 'Barcelona'
 
 
 ```
@@ -30,7 +30,7 @@ Each of the questions/tasks below can be answered using a `SELECT` query. When y
 
 ```sql
 <!SELECT * FROM divisions WHERE name = 'Bundesliga';
-SELECT COUNT(id) FROM matches WHERE division_code = 'D1' AND hometeam = 'Freiburg' OR awayteam = 'Freiburg';
+SELECT COUNT(id) FROM matches WHERE division_code = 'D1' AND (hometeam = 'Freiburg' OR awayteam = 'Freiburg');
 
 
 ```
@@ -46,15 +46,16 @@ SELECT COUNT(id) FROM matches WHERE division_code = 'D1' AND hometeam = 'Freibur
 6) How many different teams have played in matches recorded in a French division?
 
 ```sql
-<!SELECT COUNT(DISTINCT hometeam) FROM matches WHERE division_code = 'F1' OR division_code = 'F2';
+<!SELECT COUNT(DISTINCT hometeam) FROM matches WHERE (division_code = 'F1' OR division_code = 'F2');
 
+SELECT COUNT(DISTINCT hometeam) FROM matches WHERE division_code in ('F1','F2');
 
 ```
 
 7) Have Huddersfield played Swansea in the period covered?
 
 ```sql
-<!SELECT * FROM matches WHERE hometeam = 'Huddersfield' AND awayteam = 'Swansea';
+<!SELECT * FROM matches WHERE (hometeam = 'Huddersfield' AND awayteam = 'Swansea');
 
 
 ```
@@ -62,7 +63,7 @@ SELECT COUNT(id) FROM matches WHERE division_code = 'D1' AND hometeam = 'Freibur
 8) How many draws were there in the Eredivisie between 2010 and 2015?
 
 ```sql
-<!SELECT COUNT(id) FROM matches WHERE division_code = 'N1' AND ftr = 'D' AND season BETWEEN 2010 AND 2015;
+<!SELECT COUNT(id) FROM matches WHERE (division_code = 'N1' AND ftr = 'D') AND (season BETWEEN 2010 AND 2015);
 
 
 ```
